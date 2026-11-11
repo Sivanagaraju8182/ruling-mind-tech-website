@@ -1,0 +1,91 @@
+/*
+ * globals.css  -  Global styles + our signature decorative classes.
+ * Tailwind's three layers come first, then our own "royal" touches.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ink-950 font-body text-jade-100 antialiased;
+  }
+  /* Clear gold focus ring for keyboard users (accessibility) */
+  :focus-visible {
+    outline: 2px solid theme("colors.gold.400");
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: theme("colors.gold.500");
+    color: theme("colors.ink.950");
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* ---- SIGNATURE 1: the "lattice" — a faint diamond-weave pattern like royal brocade ---- */
+  .lattice {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 2 62 32 32 62 2 32Z' fill='none' stroke='%23C9A24B' stroke-opacity='0.12'/%3E%3Cpath d='M32 22 42 32 32 42 22 32Z' fill='none' stroke='%23C9A24B' stroke-opacity='0.07'/%3E%3C/svg%3E");
+    background-size: 64px 64px;
+  }
+  .lattice-light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 2 62 32 32 62 2 32Z' fill='none' stroke='%230E4034' stroke-opacity='0.07'/%3E%3C/svg%3E");
+    background-size: 64px 64px;
+  }
+
+  /* ---- SIGNATURE 2: "crest corners" — gold brackets on two opposite corners ---- */
+  .crest {
+    position: relative;
+  }
+  .crest::before,
+  .crest::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    transition: width 0.4s ease, height 0.4s ease;
+  }
+  .crest::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid theme("colors.gold.500");
+    border-left: 2px solid theme("colors.gold.500");
+  }
+  .crest::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid theme("colors.gold.500");
+    border-right: 2px solid theme("colors.gold.500");
+  }
+  .crest:hover::before,
+  .crest:hover::after {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* ---- SIGNATURE 3: chamfered (corner-cut) buttons, like a royal seal ---- */
+  .chamfer {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+
+  .gold-gradient {
+    background-image: linear-gradient(135deg, #efd9a0 0%, #c9a24b 45%, #a98230 100%);
+  }
+}
+
+/* Respect visitors who turned off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
