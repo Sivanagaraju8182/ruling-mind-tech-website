@@ -71,3 +71,68 @@ export function validateContact(input: unknown): ValidationResult {
 
   return Object.keys(errors).length > 0 ? { ok: false, errors } : { ok: true, value };
 }
+
+// =====================================================================
+//  CAREERS: job application rules (used by the form AND by /api/careers)
+// =====================================================================
+export const EXPERIENCE_OPTIONS = ["Fresher (0 years)", "Up to 1 year", "1 to 3 years", "3 to 5 years", "More than 5 years"] as const;
+
+export type ApplicationPayload = {
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  experience: string;
+  /** Link to resume (Google Drive etc.), portfolio, LinkedIn or GitHub */
+  link: string;
+  message: string;
+  /** Confirms the applicant is 18 or older (DPDP Act: children's data) */
+  adult: boolean;
+  consent: boolean;
+  /** Hidden honeypot field for spam bots */
+  website: string;
+};
+
+export type ApplicationErrors = Partial<Record<keyof ApplicationPayload, string>>;
+
+export type ApplicationResult = { ok: true; value: ApplicationPayload } | { ok: false; errors: ApplicationErrors };
+
+function isWebLink(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:"; // blocks javascript: and other tricks
+  } catch {
+    return false;
+  }
+}
+
+export function validateApplication(input: unknown, allowedRoles: readonly string[]): ApplicationResult {
+  const data = (typeof input === "object" && input !== null ? input : {}) as Record<string, unknown>;
+
+  const value: ApplicationPayload = {
+    name: clean(data.name, 80),
+    email: clean(data.email, 120).toLowerCase(),
+    phone: clean(data.phone, 20),
+    role: clean(data.role, 80),
+    experience: clean(data.experience, 40),
+    link: clean(data.link, 300),
+    message: clean(data.message, 1500),
+    adult: data.adult === true,
+    consent: data.consent === true,
+    website: clean(data.website, 100),
+  };
+
+  const errors: ApplicationErrors = {};
+
+  if (value.name.length < 2) errors.name = "Please enter your full name.";
+  if (!EMAIL_PATTERN.test(value.email)) errors.email = "Please enter a valid email address.";
+  if (!PHONE_PATTERN.test(value.phone)) errors.phone = "Please enter a valid phone number.";
+  if (!allowedRoles.includes(value.role)) errors.role = "Please choose a role.";
+  if (!(EXPERIENCE_OPTIONS as readonly string[]).includes(value.experience)) errors.experience = "Please choose your experience.";
+  if (!isWebLink(value.link)) errors.link = "Please paste a link starting with https:// (resume, portfolio, LinkedIn or GitHub).";
+  if (value.message.length < 20) errors.message = "Please tell us a little about yourself (at least 20 characters).";
+  if (!value.adult) errors.adult = "You must be 18 years or older to apply.";
+  if (!value.consent) errors.consent = "Please tick the box so we may process your application.";
+
+  return Object.keys(errors).length > 0 ? { ok: false, errors } : { ok: true, value };
+}

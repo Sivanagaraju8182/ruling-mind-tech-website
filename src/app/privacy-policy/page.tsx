@@ -34,6 +34,9 @@ export default function PrivacyPolicyPage() {
           <strong>Contact form:</strong> your name, email address, phone number (optional), company (optional), the service you are interested in and your message.
         </li>
         <li>
+          <strong>Job applications (Careers page):</strong> your name, email, phone number, role, experience, a link to your resume or portfolio, your message and your confirmation that you are 18 or older.
+        </li>
+        <li>
           <strong>Cookie choice:</strong> a small record in your browser storing your cookie preferences and the time you made them.
         </li>
         <li>
@@ -45,6 +48,7 @@ export default function PrivacyPolicyPage() {
       <h2>3. Why we use your data</h2>
       <ul>
         <li>To reply to your enquiry and discuss your project (based on your consent when you tick the box on the contact form).</li>
+        <li>To assess your job application and contact you about it and, with your consent, about future suitable roles.</li>
         <li>To remember your cookie choices (necessary for the website to respect your consent).</li>
         <li>To protect the website from spam, abuse and attacks (a legitimate use permitted by the Act).</li>
         <li>To improve the website, but only if you accept analytics cookies.</li>
@@ -79,7 +83,7 @@ export default function PrivacyPolicyPage() {
       <h2>6. How long we keep data</h2>
       <p>
         Enquiries are kept for as long as needed to respond and, if we work together, for the duration of the relationship plus the period required by law. If your enquiry does not lead to a project,
-        we delete it within 12 months. Your cookie choice is kept for 12 months. We erase personal data when its purpose has ended or when you withdraw consent, unless a law requires us to keep it.
+        we delete it within 12 months. Job applications are kept for up to 12 months after the hiring decision (so we can contact you about future roles) unless you ask for earlier deletion. Your cookie choice is kept for 12 months. We erase personal data when its purpose has ended or when you withdraw consent, unless a law requires us to keep it.
       </p>
 
       <h2>7. How we protect your data</h2>
@@ -113,7 +117,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>9. Children</h2>
       <p>
-        This website is meant for businesses and adults. We do not knowingly collect personal data from anyone under 18 years of age. If you believe a child has sent us data, contact us and we will
+        This website is meant for businesses and adults, and job applicants must be 18 or older. We do not knowingly collect personal data from anyone under 18 years of age. If you believe a child has sent us data, contact us and we will
         delete it. We never track or target children with advertising.
       </p>
 

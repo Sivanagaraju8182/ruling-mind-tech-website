@@ -89,4 +89,14 @@ export const navLinks: NavItem[] = [
       { label: "Start a project", href: "/about#get-started" },
     ],
   },
+  {
+    label: "Careers",
+    href: "/careers",
+    children: [
+      { label: "Why join us", href: "/careers#why-join" },
+      { label: "How we hire", href: "/careers#hiring-process" },
+      { label: "Open positions", href: "/careers#open-roles" },
+      { label: "Apply now", href: "/careers#apply" },
+    ],
+  },
 ];

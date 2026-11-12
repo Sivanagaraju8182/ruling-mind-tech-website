@@ -56,6 +56,28 @@ Recommended VS Code extensions: *Tailwind CSS IntelliSense*, *ESLint*, *Prettier
 
 ---
 
+## 1c. Version 3: Careers page
+
+- New page **/careers** with: Why join us, How we hire, Open positions, and an Apply form (role is pre-selected when the visitor clicks "Apply for this role").
+- New **Careers** item in the header (with hover buttons) and in the footer.
+- **Edit the jobs** in `src/lib/careers.ts` (title, type, experience, skills, duties). These are SAMPLE roles: ask your manager to confirm the real ones. Edit the page text in `src/app/careers/page.tsx`.
+- The form asks for: name, email, phone, role, experience, a LINK to the resume (Google Drive, LinkedIn, GitHub), a message, an "I am 18+" tick and a consent tick (DPDP Act). No files are uploaded, which keeps the server safe and simple.
+- Applications arrive at `src/app/api/careers/route.ts`. **To receive them by email**, copy the same email code you used in `src/app/api/contact/route.ts` (README section 4) into the marked place in this file, and send to your hiring inbox.
+- The Privacy Policy now covers job applications (what we collect, why, 12-month retention).
+
+### Updating a site that is already live (GitHub + Vercel)
+1. Unzip the new version to a temporary folder (for example your Desktop).
+2. Copy the files into your existing project folder and choose **Replace**. **Do NOT copy over `src/lib/site.ts`** (it holds your real company details); instead add the Careers block shown in the update notes.
+3. In VS Code run `npm run build` to check, then:
+   ```bash
+   git add .
+   git commit -m "Add Careers page"
+   git push
+   ```
+4. Vercel redeploys automatically in about a minute.
+
+---
+
 ## 2. Folder structure (what is where)
 
 ```
@@ -76,6 +98,7 @@ ruling-mind-tech/
     |   |-- services/page.tsx  <- SERVICES  ( /services )
     |   |-- process/page.tsx   <- PROCESS   ( /process )
     |   |-- about/page.tsx     <- ABOUT     ( /about )
+    |   |-- careers/page.tsx   <- CAREERS   ( /careers ), jobs are in lib/careers.ts
     |   |-- contact/page.tsx   <- CONTACT   ( /contact )
     |   |-- privacy-policy/    <- PRIVACY POLICY (DPDP Act)
     |   |-- terms/             <- TERMS OF USE
@@ -91,10 +114,12 @@ ruling-mind-tech/
     |   |-- home/HeroPhoto.tsx       <- real photo version of the hero
     |   |-- consent/                 <- cookie banner + consent memory
     |   |-- contact/ContactForm.tsx, LocationMap.tsx
+    |   |-- careers/CareersApply.tsx  <- open roles + application form
     |   `-- legal/LegalPage.tsx
     `-- lib/
         |-- site.ts            <- COMPANY DETAILS (email, phone, address)  <<< EDIT FIRST
         |-- services.ts        <- list of services
+        |-- careers.ts         <- job openings
         |-- process.ts         <- the 5 process steps
         |-- validation.ts      <- form rules (browser + server)
         |-- rateLimit.ts       <- anti-spam limiter

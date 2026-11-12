@@ -59,8 +59,8 @@ export default function Header() {
         </Link>
 
         {/* ---------- Desktop navigation with hover dropdowns ---------- */}
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-8">
+        <nav aria-label="Main" className="hidden xl:block">
+          <ul className="flex items-center gap-7">
             {navLinks.map((link) => {
               const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
               const open = openKey === link.href;
@@ -127,7 +127,7 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center border border-gold-500/40 text-gold-300 lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center border border-gold-500/40 text-gold-300 xl:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -139,7 +139,7 @@ export default function Header() {
 
       {/* ---------- Mobile navigation ---------- */}
       {menuOpen && (
-        <nav id="mobile-menu" aria-label="Mobile" className="max-h-[calc(100vh-4.75rem)] overflow-y-auto border-t border-gold-500/20 px-6 pb-6 pt-2 lg:hidden">
+        <nav id="mobile-menu" aria-label="Mobile" className="max-h-[calc(100vh-4.75rem)] overflow-y-auto border-t border-gold-500/20 px-6 pb-6 pt-2 xl:hidden">
           <ul className="flex flex-col">
             {navLinks.map((link) => {
               const expanded = mobileKey === link.href;
